@@ -18,20 +18,20 @@ INIT
         AND #%11111011
         STA CPUPORT
 
-        ; DEFINE CHAR RAM START
+        ; DEFINE CHAR RAM START $3000
         LDA #$00
         STA $FA
         LDA #$30
         STA $FB
 
-        ; DEFINE CHAR ROM START
+        ; DEFINE CHAR ROM START $D000
         LDA #$00
         STA $FC
         LDA #$D0
         STA $FD
 
         ; COPY CHARACTERS ROM -> RAM
-        LDY #0
+        LDY #0          ; Y ACTS AS A READ/WRITE LSB OFFSET
 CPYLOOP
         LDA ($FC),Y     ; READ BYTE FROM ROM (TO ADDRESS *FD+*FC+Y)
         STA ($FA),Y     ; WRITE BYTE TO RAM (TO ADDRESS *FB+*FA+Y)
